@@ -1,4 +1,3 @@
-import { FaCopy } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import { FaExchangeAlt } from "react-icons/fa";
 import "./App.css";
@@ -9,6 +8,8 @@ function App() {
   const [fromLang, setFromLang] = useState("en");
   const [toLang, setToLang] = useState("ur");
   const [toText, setToText] = useState("");
+  const [iscopy, setIsCopy] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
   const [translate, setTranslate] = useState(true);
 
   useEffect(() => {
@@ -43,12 +44,13 @@ function App() {
   };
   const handlerCopy = () => {
     navigator.clipboard.writeText(toText);
-    alert(toText);
+    setIsCopy(true);
   };
-  const inputHandler = () => {
+  const deleteHandler = () => {
     setFromText("");
     setTranslate(true);
     setToText("");
+    setIsCopy(false);
   };
   return (
     <>
@@ -64,7 +66,7 @@ function App() {
                 onInput={(e) => setFromText(e.target.value)}
               ></textarea>
 
-              <ImCross className="icon icn" onClick={inputHandler} />
+              <ImCross className="icon icn" onClick={deleteHandler} />
             </div>
             <div className="text">
               <textarea
@@ -73,7 +75,9 @@ function App() {
                 className="to-text"
                 placeholder={translate ? "Translate" : "Translating..."}
               ></textarea>
-              <FaCopy className="icon icn" onClick={handlerCopy} />
+              <button className="icon icn" onClick={handlerCopy}>
+                {iscopy ? "Copied" : "Copy"}
+              </button>
             </div>
           </div>
           <ul className="controls">
@@ -109,7 +113,9 @@ function App() {
             </li>
           </ul>
         </div>
-        <button onClick={translateText}>Translate Text</button>
+        <button className="btn" onClick={translateText}>
+          Translate Text
+        </button>
       </div>
     </>
   );
