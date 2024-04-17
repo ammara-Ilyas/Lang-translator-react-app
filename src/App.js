@@ -45,6 +45,9 @@ function App() {
   const handlerCopy = () => {
     navigator.clipboard.writeText(toText);
     setIsCopy(true);
+    setTimeout(() => {
+      setIsCopy(false);
+    }, 2000);
   };
   const deleteHandler = () => {
     setFromText("");
