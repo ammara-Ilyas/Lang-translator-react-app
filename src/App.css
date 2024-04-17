@@ -134,7 +134,9 @@ li,
   border-radius: 5px;
   background: #5372f0;
 }
-
+.container .btn:active {
+  background-color: blue;
+}
 @media (max-width: 660px) {
   .container {
     padding: 20px;
