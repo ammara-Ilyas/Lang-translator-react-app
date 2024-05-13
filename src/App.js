@@ -9,7 +9,6 @@ function App() {
   const [toLang, setToLang] = useState("ur");
   const [toText, setToText] = useState("");
   const [iscopy, setIsCopy] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(true);
   const [translate, setTranslate] = useState(true);
 
   useEffect(() => {
