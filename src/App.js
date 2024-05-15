@@ -31,12 +31,10 @@ function App() {
   const translateText = () => {
     setTranslated(false);
     let apiUrl = `https://api.mymemory.translated.net/get?q=${fromText} &langpair=${fromLang.toLocaleLowerCase()}|${toLang} `;
-    console.log(fromLang);
     const fetchData = async () => {
       await fetch(apiUrl)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setToText(data.responseData.translatedText);
         });
       // setTranslated(true);
