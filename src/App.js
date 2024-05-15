@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   const translateText = () => {
-    setTranslated(true);
+    setTranslated(false);
     let apiUrl = `https://api.mymemory.translated.net/get?q=${fromText} World!&langpair=${fromLang.toLocaleLowerCase()}|${toLang} `;
     console.log(fromLang);
     const fetchData = async () => {
@@ -40,7 +40,7 @@ function App() {
           console.log(data);
           setToText(data.responseData.translatedText);
         });
-      setTranslated(false);
+      // setTranslated(true);
     };
     fetchData();
   };
@@ -57,6 +57,7 @@ function App() {
   return (
     <>
       <div className="container">
+        <h4>MAX ALLOWED QUERY : 500 CHARS</h4>
         <div className="wrapper">
           <div className="text-input">
             <div className="text">

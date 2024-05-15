@@ -29,6 +29,7 @@ body {
   border-radius: 0px;
 }
 .text-input textarea {
+  text-transform: capitalize;
   height: 95%;
   width: 85%;
   border: none;
@@ -48,7 +49,7 @@ body {
 .icn {
   position: absolute;
   top: 15px;
-  right: 5px;
+  right: 7px;
   border: none;
   background-color: white;
 }
@@ -176,4 +177,7 @@ li,
 }
 .icon:hover {
   color: black;
+}
+.text {
+  overflow: hidden;
 }
