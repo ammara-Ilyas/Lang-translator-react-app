@@ -19,7 +19,6 @@ function App() {
       await fetch("https://libretranslate.com/languages")
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
           setLanguage(result);
         })
         .catch((error) => {
@@ -31,7 +30,7 @@ function App() {
 
   const translateText = () => {
     setTranslated(false);
-    let apiUrl = `https://api.mymemory.translated.net/get?q=${fromText} World!&langpair=${fromLang.toLocaleLowerCase()}|${toLang} `;
+    let apiUrl = `https://api.mymemory.translated.net/get?q=${fromText} &langpair=${fromLang.toLocaleLowerCase()}|${toLang} `;
     console.log(fromLang);
     const fetchData = async () => {
       await fetch(apiUrl)
