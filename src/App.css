@@ -141,6 +141,9 @@ li,
   .container {
     padding: 20px;
   }
+  .text {
+    width: 100%;
+  }
   .wrapper .text-input {
     flex-direction: column;
   }
@@ -150,6 +153,7 @@ li,
   }
   .text-input textarea {
     height: 200px;
+    width: 95%;
   }
   .controls .row .icons {
     display: none;
@@ -167,4 +171,9 @@ li,
 }
 .icon {
   color: grey;
+  font-size: 24px;
+  transition: 0.5s;
+}
+.icon:hover {
+  color: black;
 }

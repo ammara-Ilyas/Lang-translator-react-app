@@ -1,6 +1,9 @@
-import { ImCross } from "react-icons/im";
+import { RxCross2 } from "react-icons/rx";
 import { FaExchangeAlt } from "react-icons/fa";
+import { IoIosCopy } from "react-icons/io";
 import "./App.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 function App() {
   const [fromText, setFromText] = useState("");
@@ -8,8 +11,8 @@ function App() {
   const [fromLang, setFromLang] = useState("en");
   const [toLang, setToLang] = useState("ur");
   const [toText, setToText] = useState("");
-  const [iscopy, setIsCopy] = useState(false);
-  const [translate, setTranslate] = useState(true);
+  const [isTranslated, setTranslated] = useState(true);
+  const notify = () => toast.success("Copied");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +30,7 @@ function App() {
   }, []);
 
   const translateText = () => {
-    setTranslate(true);
+    setTranslated(true);
     let apiUrl = `https://api.mymemory.translated.net/get?q=${fromText} World!&langpair=${fromLang.toLocaleLowerCase()}|${toLang} `;
     console.log(fromLang);
     const fetchData = async () => {
@@ -37,22 +40,19 @@ function App() {
           console.log(data);
           setToText(data.responseData.translatedText);
         });
-      setTranslate(false);
+      setTranslated(false);
     };
     fetchData();
   };
   const handlerCopy = () => {
     navigator.clipboard.writeText(toText);
-    setIsCopy(true);
-    setTimeout(() => {
-      setIsCopy(false);
-    }, 2000);
+
+    notify();
   };
   const deleteHandler = () => {
     setFromText("");
-    setTranslate(true);
+    setTranslated(true);
     setToText("");
-    setIsCopy(false);
   };
   return (
     <>
@@ -68,23 +68,22 @@ function App() {
                 onInput={(e) => setFromText(e.target.value)}
               ></textarea>
 
-              <ImCross className="icon icn" onClick={deleteHandler} />
+              <RxCross2 className="icon icn" onClick={deleteHandler} />
             </div>
             <div className="text">
               <textarea
                 spellCheck="false"
                 value={toText}
                 className="to-text"
-                placeholder={translate ? "Translate" : "Translating..."}
+                placeholder={isTranslated ? "Translate" : "Translating..."}
               ></textarea>
               <button className="icon icn" onClick={handlerCopy}>
-                {iscopy ? "Copied" : "Copy"}
+                <IoIosCopy />
               </button>
             </div>
           </div>
           <ul className="controls">
             <li className="row from">
-              <div className="icons"></div>
               <select
                 onChange={(e) => setFromLang(e.target.value)}
                 value={fromLang}
@@ -119,6 +118,18 @@ function App() {
           Translate Text
         </button>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </>
   );
 }
